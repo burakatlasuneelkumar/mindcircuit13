@@ -1,13 +1,14 @@
-##artifact build stage
-FROM maven AS buildstage
-RUN mkdir /opt/mindcircuit13
-WORKDIR /opt/mindcircuit13
-COPY . .
-RUN mvn clean install    ## artifact -- .war
+# Use an official OpenJDK runtime as the base image
+FROM openjdk:17-jdk-slim
 
-### tomcat deploy stage
-FROM tomcat
-WORKDIR webapps
-COPY --from=buildstage /opt/mindcircuit13/target/*.war .
-RUN rm -rf ROOT && mv *.war ROOT.war
-EXPOSE 8080
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the JAR file from the Maven build stage
+COPY target/mindcircuitbatch13-2.246.jar /app/mindcircuitbatch13.jar
+
+# Expose the application port (adjust if necessary)
+EXPOSE 8082
+
+# Run the application
+ENTRYPOINT ["java", "-jar", "/app/mindcircuitbatch13.jar"]
