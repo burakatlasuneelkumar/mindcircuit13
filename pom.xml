@@ -16,8 +16,8 @@
 
 	<distributionManagement>
 		 <snapshotRepository>
-		    <id>NexusRepo</id>
-		    <url>http://100.25.155.112:8081/repository/mc-snapshot/</url>
+		    <id>maven-releases</id>
+		    <url>http://18.232.67.253:8081/repository/maven-releases/</url>
 		 </snapshotRepository>
 		
 		<repository>
